@@ -1,0 +1,35 @@
+database:
+  file: "tapo_data.db"
+  table: "device_metrics"
+  schema:
+    - name: "device_status"
+      type: "INTEGER"
+      source: "device_on"
+
+    - name: "power_consumption"
+      type: "REAL"
+      source: "current_power"
+
+    - name: "daily_energy_consumption"
+      type: "REAL"
+      source: "today_energy"
+
+    - name: "monthly_energy_consumption"
+      type: "REAL"
+      source: "month_energy"
+
+    - name: "device_name"
+      type: "TEXT"
+      source: "nickname"
+
+    - name: "signal_strength"
+      type: "INTEGER"
+      source: "rssi"
+      
+    - name: "firmware_version"
+      type: "TEXT"
+      source: "fw_ver"
+
+    - name: "timestamp"
+      type: "TEXT"
+      source: "timestamp"
