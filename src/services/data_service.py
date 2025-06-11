@@ -1,5 +1,6 @@
 import asyncio
 import sqlite3
+import aiosqlite
 from tapo import ApiClient
 from datetime import datetime
 import time
@@ -64,20 +65,14 @@ class DataService:
         
         return data
 
-    def save_data(self, data: dict):
-        # Get all schema fields (including ones not in current data)
-        schema_fields = [field['name'] for field in self.db_config['database']['schema'] 
-                        if field and 'name' in field]
-        
-        # Prepare data with NULL for missing fields
-        insert_data = []
-        for field in schema_fields:
-            insert_data.append(data.get(field, None))  # None becomes NULL in SQLite   
-        
-        placeholders = ', '.join(['?' for _ in schema_fields])
-        
-        self.conn.execute(
-            f"INSERT INTO {self.db_config['database']['table']} ({', '.join(schema_fields)}) VALUES ({placeholders})",
-            insert_data
-        )
-        self.conn.commit()
+    async def save_data(self, data: dict):
+        async with aiosqlite.connect(self.db_config['database']['file']) as conn:
+            schema_fields = [field['name'] for field in self.db_config['database']['schema'] if field and 'name' in field]
+            insert_data = [data.get(field, None) for field in schema_fields]
+            placeholders = ', '.join(['?' for _ in schema_fields])
+
+            await conn.execute(
+                f"INSERT INTO {self.db_config['database']['table']} ({', '.join(schema_fields)}) VALUES ({placeholders})",
+                insert_data
+            )
+            await conn.commit()
