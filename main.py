@@ -31,7 +31,7 @@ async def main():
     # Initial authentication with retry logic
     try:
         data, email, password = await authenticate_and_get_data(service, device_config['device']['ip'])
-        service.save_data(data)
+        await service.save_data(data)
         print(f"Data saved at {data['timestamp']}")
     except AuthenticationError:
         print("Failed to authenticate. Exiting.")
@@ -42,7 +42,7 @@ async def main():
         try:
             await asyncio.sleep(5)  # 5 second interval between readings
             data = await service.get_device_data(email, password, device_config['device']['ip'])
-            service.save_data(data)
+            await service.save_data(data)
             print(f"Data saved at {data['timestamp']}")
             
         except Exception as e:
@@ -54,7 +54,7 @@ async def main():
                 try:
                     # Re-authenticate with retry logic
                     data, email, password = await authenticate_and_get_data(service, device_config['device']['ip'])
-                    service.save_data(data)
+                    await service.save_data(data)
                     print(f"Re-authentication successful. Data saved at {data['timestamp']}")
                 except AuthenticationError:
                     print("Re-authentication failed after 3 attempts. Exiting.")
