@@ -9,9 +9,9 @@ class DataService:
     def __init__(self, db_config: dict):
         self.db_config = db_config
         self.conn = sqlite3.connect(db_config['database']['file'])
-        self._create_table(db_config)
+        self.create_table(db_config)
     
-    def _create_table(self, config: dict):
+    def create_table(self, config: dict):
         # Keep all columns from schema, even if some fields are removed from data collection
         columns = []
         for col in config['database']['schema']:
