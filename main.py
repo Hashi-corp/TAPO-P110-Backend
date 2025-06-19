@@ -20,7 +20,7 @@ async def authenticate_and_get_data(service, device_ip):
                     # Non-authentication error, re-raise
                     raise e
     except AuthenticationError as e:
-        print(f"Authentication failed after 3 attempts: {e}")
+        print(f"Authentication (attempt limit exceeded.)): {e}")
         raise e
 
 async def main():
