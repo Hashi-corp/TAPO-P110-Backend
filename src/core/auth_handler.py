@@ -16,11 +16,11 @@ class AuthHandler:
         """Get credentials with retry on wrong credentials"""
         max_attempts = 3
         
-        for attempt in range(max_attempts):
+        for attempt in range(0, max_attempts):
             if attempt == 0:
                 email, password = AuthHandler.get_credentials()
             else:
-                print(f"Wrong credentials. Try again ({attempt + 1}/{max_attempts})")
+                print(f"Wrong credentials. Try again ({attempt}/{max_attempts})")
                 email = input("Tapo Email: ")
                 password = getpass("Tapo Password: ")
             
@@ -28,4 +28,4 @@ class AuthHandler:
             yield email, password
         
         # If we get here, all attempts failed
-        raise AuthenticationError("Authentication failed after 3 attempts")
+        raise AuthenticationError("Authentication failed after 3 attempts.")
