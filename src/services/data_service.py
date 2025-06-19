@@ -1,9 +1,7 @@
-import asyncio
 import sqlite3
 import aiosqlite
 from tapo import ApiClient
 from datetime import datetime
-import time
 
 class DataService:
     def __init__(self, db_config: dict):
