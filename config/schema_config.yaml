@@ -1,0 +1,69 @@
+# Device database configuration
+devices_db:
+  file: "devices.db"
+  table: "devices"
+  schema:
+    - name: "name"
+      type: "TEXT UNIQUE"
+      description: "Device name/identifier"
+    - name: "type"
+      type: "TEXT"
+      description: "Device type (SmartPlug, PowerSupply, etc.)"
+    - name: "connector"
+      type: "TEXT"
+      description: "Connection type (API, modbus, etc.)"
+    - name: "ip"
+      type: "TEXT"
+      description: "Device IP address"
+    - name: "description"
+      type: "TEXT"
+      description: "Device description"
+
+# Tapo Smart Plug configuration
+SmartPlug:
+  file: "tapo_data.db"
+  table: "tapo_device_metrics"
+  schema:
+    - name: "device_name"
+      type: "TEXT"
+      description: "Name of the device"
+    - name: "device_on"
+      type: "INTEGER"
+      description: "Device power state (0=off, 1=on)"
+    - name: "current_power"
+      type: "REAL"
+      description: "Current power consumption in watts"
+    - name: "today_energy"
+      type: "REAL"
+      description: "Energy used today in kWh"
+    - name: "month_energy"
+      type: "REAL"
+      description: "Energy used this month in kWh"
+    - name: "nickname"
+      type: "TEXT"
+      description: "User-assigned device name"
+    - name: "signal_level"
+      type: "INTEGER"
+      description: "WiFi signal strength"
+    - name: "timestamp"
+      type: "TEXT"
+      description: "Timestamp of data collection"
+
+# Schneider device configuration
+schneider:
+  file: "schneider_data.db"
+  table: "schneider_device_metrics"
+  schema:
+    - name: "device_name"
+      type: "TEXT"
+      description: "Name of the device"
+    - name: "totalApparentPower"
+      type: "REAL"
+      description: "Total apparent power in VA"
+      address: XXXX
+      length: X
+      format: ""
+      scale: X
+    - name: "timestamp"
+      type: "TEXT"
+      description: "Timestamp of data collection"

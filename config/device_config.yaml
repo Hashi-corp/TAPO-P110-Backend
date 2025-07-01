@@ -1,0 +1,21 @@
+devices:
+  schneiderModbusConverter:
+    type: schneider
+    connector: modbus
+    ip: ""
+    port: ""
+    slave_id: ""
+    description: "Schneider power supply"
+    manufacturer: "Schneider Electric"
+    model: "Schneider7230"
+    
+  TapoP110SmartPlug:
+    type: SmartPlug 
+    connector: API
+    username: ""
+    password: ""
+    ip: ""
+    description: "Smart plug for monitoring energy consumption"
+    manufacturer: "TP-Link"
+    model: "P110"
+    location: ""
